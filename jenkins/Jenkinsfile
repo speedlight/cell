@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "${BUILD_MSG}"
 		checkout scm
-		def cellImage = return docker.build("cell-Image", "-f ./app/Dockerfile .")
+		return docker.build("cell-Image", "-f ./app/Dockerfile .")
             }
         }
         stage('Test') {
