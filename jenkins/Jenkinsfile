@@ -2,24 +2,25 @@
 
 pipeline {
 
-    agent any
+    agent none
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building.. ${env.BUILD_ID} on ${env.JENKINS_URL}'
 		checkout scm
 		def cellImage = docker.build("cell-Image", "./app/Dockerfile")
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing.. ${env.BUILD_ID}'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying.... ${env.BUILD_ID}'
+		cellImage.push()
             }
         }
     }
