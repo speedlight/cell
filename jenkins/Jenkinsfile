@@ -8,13 +8,13 @@ pipeline {
 
     stages {
         echo '${BUILD_MSG}'
-        node ('cell'){
-            stage('Build') {
-	        steps {
-	           checkout scm
-	           def cellImage = docker.build("cell-Image", "-f ./app/Dockerfile .")
-	        }
-	    }
+        stage('Build') {
+             node ('cell'){
+	          steps {
+	             checkout scm
+	             def cellImage = docker.build("cell-Image", "-f ./app/Dockerfile .")
+	          }
+	     }
         }
         stage('Test') {
             steps {
