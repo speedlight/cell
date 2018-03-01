@@ -9,12 +9,11 @@ node {
 
     stage('Build') {
         app = docker.build("cell-image", "./app/Dockerfile .")
+    }
 
     stage('Run tests') {
         app.inside {
             sh 'echo "Tests passed"'
         }
     }
-
-    stage('Push') {
-        docker
+}
