@@ -9,10 +9,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "${BUILD_MSG}"
+                echo '${BUILD_MSG}'
+		node {
 		checkout scm
 		//def cellImage = docker.build("cell-Image", "-f ./app/Dockerfile .")
 		//cellImage.push()
+	        }
             }
         }
         stage('Test') {
