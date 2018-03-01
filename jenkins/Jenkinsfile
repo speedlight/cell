@@ -9,9 +9,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo ${BUILD_MSG}
+                echo "${BUILD_MSG}"
 		checkout scm
-		def cellImage = docker.build("cell-Image", "./app/Dockerfile")
+		def cellImage = return docker.build("cell-Image", "-f ./app/Dockerfile .")
             }
         }
         stage('Test') {
@@ -22,7 +22,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying.... ${env.BUILD_ID}'
-		cellImage.push()
             }
         }
     }
