@@ -2,9 +2,7 @@ pipeline {
 
     agent any
 
-    node {
-      checkout scm
-      def cellImage = docker.build("cell-image", "./app/Dockerfile")
+    stages {
         stage('Build') {
             steps {
                 echo 'Building..'
