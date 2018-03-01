@@ -7,14 +7,14 @@ pipeline {
     }
 
     stages {
-        echo '${BUILD_MSG}'
         stage('Build') {
-             node ('cell'){
-	          steps {
-	             checkout scm
-	             def cellImage = docker.build("cell-Image", "-f ./app/Dockerfile .")
-	          }
-	     }
+            steps {
+                echo '${BUILD_MSG}'
+		node ('cell'){
+		    checkout scm
+		    def cellImage = docker.build("cell-Image", "-f ./app/Dockerfile .")
+	        }
+            }
         }
         stage('Test') {
             steps {
