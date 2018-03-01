@@ -1,13 +1,15 @@
 #!/usr/bin/env groovy|
 
 pipeline {
-
     agent none
+    environment {
+	BUILD_MSG = 'Building.. ${env.BUILD_ID} on ${env.JENKINS_URL}'
+    }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building.. ${env.BUILD_ID} on ${env.JENKINS_URL}'
+                echo ${BUILD_MSG}
 		checkout scm
 		def cellImage = docker.build("cell-Image", "./app/Dockerfile")
             }
